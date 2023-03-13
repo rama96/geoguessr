@@ -38,7 +38,12 @@ def prepare_data():
     data = get_images_dataset()    
     
     # X and y transforms
-    transforms = transforms.Compose( [transforms.ToTensor()])
+    transforms = transforms.Compose( 
+                [            transforms.Resize((256,256)),
+                            transforms.CenterCrop(224),
+                            transforms.ToTensor(),
+                ]
+        )
     target_transform = None 
     
     geoguessr_dataset = GeoGuessrDataset(ds = data, label_name = 'country_code_iso', transform=transforms, target_transform=target_transform)
