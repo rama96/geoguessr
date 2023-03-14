@@ -1,8 +1,10 @@
-from geoguessr.dataset import prepare_data
+from geoguessr.preprocess import prepare_data
 
 
 def main():
-    train_dl , test_dl =  prepare_data()
+    
+    train_dl , test_dl , train_data_size , test_data_size  , geoguessr_dataset =  prepare_data()
+    
     
 
 if __name__ == "__main__" :

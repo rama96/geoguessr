@@ -1,6 +1,4 @@
 from torch.utils.data import Dataset
-from geoguessr.download import  get_images_dataset
-from utils import create_dataset_splits
 
 class GeoGuessrDataset(Dataset):
     def __init__(self, ds, label_name, transform=None, target_transform=None):
@@ -11,6 +9,7 @@ class GeoGuessrDataset(Dataset):
         self.target_transform = target_transform
         self.targets = ds[label_name]
         self.classes_to_idx = {j:i for i,j in enumerate(set(ds[label_name]))}
+        self.idx_to_classes = {j:i for i,j in self.classes_to_idx.items()}
         
     def __len__(self):
         return len(self.ds)
@@ -32,20 +31,3 @@ class GeoGuessrDataset(Dataset):
         return image, label
         
 
-def prepare_data():
-    
-    data = get_images_dataset()    
-    
-    # X and y transforms
-    transforms = transforms.Compose( 
-                [            transforms.Resize((256,256)),
-                            transforms.CenterCrop(224),
-                            transforms.ToTensor(),
-                ]
-        )
-    target_transform = None 
-    
-    geoguessr_dataset = GeoGuessrDataset(ds = data, label_name = 'country_code_iso', transform=transforms, target_transform=target_transform)
-    train_dl , test_dl = create_dataset_splits(ds=geoguessr_dataset,TEST_SIZE=0.2,BATCH_SIZE=64)
-    
-    return train_dl , test_dl
