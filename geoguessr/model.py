@@ -50,25 +50,20 @@ class Resnet34:
 
 
 class Models:
-
-    def __init__(self):
-        
-        alexnet = Alexnet()
-        vgg16 = VGG16()
-        resnet18 = Resnet18()
-        resnet34 = Resnet34()
-
-        self.models = {
-            'alexnet':alexnet,
-            'vgg':vgg16,
-            'resnet_small':resnet18,
-            'resnet_large':resnet34,
+    models = {
+            'alexnet':Alexnet(),
+            'vgg':VGG16(),
+            'resnet_small':Resnet18(),
+            'resnet_large':Resnet34(),
         }
 
+    def __init__(self):
+        pass        
 
-    def prepare_model(self,model_name = model_name):
+    @staticmethod
+    def prepare_model(model_name = model_name):
         """ Picks the defaul model name from config , also possible to pass into the function """
-        model = self.models[model_name]
+        model = Models.models[model_name]
         model.replace_classification_layer()
-        return model
+        return model.model
 
