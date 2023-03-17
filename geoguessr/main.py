@@ -1,6 +1,6 @@
 from geoguessr.preprocess import prepare_data
 from geoguessr.model import Models
-from geoguessr.config import model_name , experiment_name , EPOCHS
+from geoguessr.config import model_name , experiment_name , EPOCHS , from_timm
 from geoguessr.train import train_and_validate
 import torch.optim as optim
 from torch import nn
@@ -11,7 +11,7 @@ def main():
     
     print(" .. Preparing_data")
     train_dl , test_dl , train_data_size , test_data_size  , geoguessr_dataset =  prepare_data()
-    model = Models.prepare_model(model_name)
+    model = Models.prepare_model(model_name, from_timm)
     
     loss_func = nn.NLLLoss()
     optimizer = optim.Adam(model.parameters())

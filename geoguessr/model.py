@@ -1,4 +1,5 @@
 from torchvision import models
+import timm
 from torch import nn
 from geoguessr.config import OUTPUT_CLASSES , model_name
 
@@ -9,8 +10,11 @@ def freeze_layers(model):
 
 
 class Alexnet:
-    def __init__(self):
-        self.model = models.alexnet(pretrained=True)
+    def __init__(self, from_timm = False):
+        if from_timm:
+            self.model = timm.create_model('resnet18',pretrained=True)
+        else : 
+            self.model = models.alexnet(pretrained=True)
         self.model = freeze_layers(self.model)
     
     def replace_classification_layer(self):
@@ -19,8 +23,11 @@ class Alexnet:
     
 
 class VGG16:
-    def __init__(self):
-        self.model = models.alexnet(pretrained=True)
+    def __init__(self, from_timm = False):
+        if from_timm:
+            self.model = timm.create_model('vgg16',pretrained=True)
+        else :
+            self.model = models.vgg16(pretrained=True)
         self.model = freeze_layers(self.model)
 
     def replace_classification_layer(self):
@@ -29,8 +36,11 @@ class VGG16:
 
 
 class Resnet18:
-    def __init__(self):
-        self.model = models.resnet18(pretrained=True)
+    def __init__(self, from_timm = False):
+        if from_timm:
+            self.model = timm.create_model('resnet18',pretrained=True)
+        else :
+            self.model = models.resnet18(pretrained=True)
         self.model = freeze_layers(self.model)
 
     def replace_classification_layer(self):
@@ -39,8 +49,11 @@ class Resnet18:
         self.model
 
 class Resnet34:
-    def __init__(self):
-        self.model = models.resnet34(pretrained=True)
+    def __init__(self, from_timm = False):
+        if from_timm:
+            self.model = timm.create_model('resnet34',pretrained=True)
+        else :
+            self.model = models.resnet34(pretrained=True)
         self.model = freeze_layers(self.model)
 
     def replace_classification_layer(self):
@@ -57,13 +70,23 @@ class Models:
             'resnet_large':Resnet34(),
         }
 
+    timm_models = {
+            'alexnet':Alexnet(True),
+            'vgg':VGG16(True),
+            'resnet_small':Resnet18(True),
+            'resnet_large':Resnet34(True),
+        }
+
     def __init__(self):
         pass        
 
     @staticmethod
-    def prepare_model(model_name = model_name):
+    def prepare_model(model_name = model_name , from_timm = False):
         """ Picks the defaul model name from config , also possible to pass into the function """
-        model = Models.models[model_name]
+        if from_timm :
+            model = Models.timm_models[model_name]
+        else :
+            model = Models.models[model_name]
         model.replace_classification_layer()
         return model.model
 

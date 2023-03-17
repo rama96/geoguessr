@@ -1,9 +1,8 @@
-from download import get_images_dataset
 from geoguessr.download import  get_images_dataset
 from geoguessr.utils import create_dataset_splits
 from torchvision import transforms
-from dataset import GeoGuessrDataset
-from config import target_label_name
+from geoguessr.dataset import GeoGuessrDataset
+from geoguessr.config import target_label_name
 
 def prepare_data():
         
