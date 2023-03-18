@@ -37,6 +37,8 @@ DIR_PLOTS = DIR_DATA.joinpath("plots")
 # ../geoguessr/geoguessr/data/plots
 DIR_HISTORY = DIR_DATA.joinpath("history")
 
+# ../geoguessr/geoguessr/data/raw
+DIR_RAW = DIR_DATA.joinpath("raw")
 
 
 create_directory_if_not_exists(DIR_DATA)

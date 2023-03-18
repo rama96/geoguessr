@@ -1,5 +1,3 @@
-
-
 from geoguessr.download import  get_images_dataset
 from torchvision import transforms
 
