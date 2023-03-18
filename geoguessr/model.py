@@ -12,7 +12,7 @@ def freeze_layers(model):
 class Alexnet:
     def __init__(self, from_timm = False):
         if from_timm:
-            self.model = timm.create_model('resnet18',pretrained=True)
+            self.model = timm.create_model('alexnet',pretrained=True)
         else : 
             self.model = models.alexnet(pretrained=True)
         self.model = freeze_layers(self.model)
