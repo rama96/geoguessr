@@ -40,6 +40,14 @@ DIR_HISTORY = DIR_DATA.joinpath("history")
 # ../geoguessr/geoguessr/data/raw
 DIR_RAW = DIR_DATA.joinpath("raw")
 
+# ../geoguessr/geoguessr/data/uploads
+DIR_UPLOADS = DIR_DATA.joinpath("uploads")
+
+# ../geoguessr/geoguessr/data/raw
+DIR_MODELS_PROD = DIR_MODULE_SUB.joinpath("models")
+
+
+
 
 create_directory_if_not_exists(DIR_DATA)
 create_directory_if_not_exists(DIR_MODEL)

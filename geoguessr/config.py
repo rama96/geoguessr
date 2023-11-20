@@ -9,3 +9,4 @@ target_label_name = 'country_iso_alpha2'
 model_name = "resnet_large"
 experiment_name = "v3"
 from_timm = True
+prod_model_name = "kaggle_dataset_with_resnet18.pkl"
